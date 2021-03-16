@@ -109,7 +109,12 @@ def parseEpub(source: fileNameType,) -> str:
     # │       └── vol.ncx          #   </guide>
     # └── source.zip               # </package>
 
-    xmlfile = os.path.join(path, "vol.opf")
+    xmlfile = os.path.join(path, "META-INF", "container.xml")
+
+    et = parse(xmlfile)
+    root = et.getroot()
+    xmlfile = os.path.join(path, root[0][0].attrib["full-path"])
+
     et = parse(xmlfile)
     root = et.getroot()
 
